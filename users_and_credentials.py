@@ -1,6 +1,7 @@
 class User:
     """Class that models instances of users."""
     users_list = []
+    credentials_list = []
     
     def __init__(self,username,password):
         """Initialize username and password attributes"""
@@ -23,6 +24,12 @@ class Credential:
         self.account_name = account_name
         self.username = username
         self.password = password
+        
+    def save_credential(self):
+        """Saves created credentials to a predefined list in the user class"""
+
+        User.credentials_list.append(self)
+
  
 
     
