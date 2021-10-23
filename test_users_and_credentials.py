@@ -32,18 +32,21 @@ class TestUser(unittest.TestCase):
         second_user.save_user()
         self.assertEqual(len(User.users_list),2)
         
-class TestCredential(unittest.TestCase):
+
+
+        
+class TestCredential(unittest.TestCase,):
     """Test class that defines the test cases for the Credential class"""
     
     def setUp(self):
         """setup method to run before each test case"""
-        
+        self.new_user = User("minnie","password")
         self.new_credential = Credential("twitter","goofy","0987")
+
         
     def tearDown(self):
         """tearDown method that does clean up after each test case has run"""
-        User.credentials_list = []
-    
+        Credential.credentials_list = []
     
     def test_credential_init(self):
         """Test to check whether the Credential object is being initialized properly """
@@ -54,14 +57,14 @@ class TestCredential(unittest.TestCase):
     def test_save_credential(self):
         """Test that confirms a credential is saved"""
         self.new_credential.save_credential()
-        self.assertEqual(len(User.credentials_list),1)
+        self.assertEqual(len(Credential.credentials_list),1)
         
     def test_save_multiple_credentials(self):        
         """Test that confirms multiple credentials are being saved"""
         self.new_credential.save_credential()
         second_credential = Credential("instagram","donald","5678")
         second_credential.save_credential()
-        self.assertEqual(len(User.credentials_list),2)
+        self.assertEqual(len(Credential.credentials_list),2)
 
 
    
