@@ -32,6 +32,14 @@ class TestUser(unittest.TestCase):
         second_user.save_user()
         self.assertEqual(len(User.users_list),2)
         
+    def test_delete_user(self):
+        """Test that confirms a user account and its credentials are deleted"""
+        self.new_user.save_user()
+        new_credential = Credential("twitter","goofy","0987")
+        new_credential.save_credential()
+        self.new_user.delete_user()
+        self.assertEqual(len(User.users_list),0)
+        self.assertEqual(len(Credential.credentials_list),0)
 
 
         

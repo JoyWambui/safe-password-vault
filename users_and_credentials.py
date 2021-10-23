@@ -13,7 +13,12 @@ class User:
         """Saves created users to a predefined list"""
 
         User.users_list.append(self)
-        
+    
+    def delete_user(self):
+        """Deletes user accounts"""
+        self.credentials_list.clear()
+        User.users_list.remove(self)
+   
 
         
 class Credential():
