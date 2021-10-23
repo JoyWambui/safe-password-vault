@@ -65,6 +65,18 @@ class TestCredential(unittest.TestCase,):
         second_credential = Credential("instagram","donald","5678")
         second_credential.save_credential()
         self.assertEqual(len(Credential.credentials_list),2)
+        
+    def test_delete_credential(self):        
+        """Test that confirms that a credential account is properly deleted"""
+        self.new_credential.save_credential()
+        second_credential = Credential("instagram","donald","5678")
+        second_credential.save_credential()
+        third_credential = Credential("facebook","winnie","123456")
+        third_credential.save_credential()
+        self.new_credential.delete_credential()
+        second_credential.delete_credential()
+        self.assertEqual(len(Credential.credentials_list),1)
+
 
 
    
