@@ -41,6 +41,12 @@ class Credential():
     def delete_credential(self):
         """Deletes credential accounts"""
         Credential.credentials_list.remove(self)
+    
+    @classmethod    
+    def display_credentials(cls):
+        """Displays all of a user's saved credentials"""
+        return cls.credentials_list
+
 
 
 

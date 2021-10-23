@@ -40,8 +40,6 @@ class TestUser(unittest.TestCase):
         self.new_user.delete_user()
         self.assertEqual(len(User.users_list),0)
         self.assertEqual(len(Credential.credentials_list),0)
-
-
         
 class TestCredential(unittest.TestCase,):
     """Test class that defines the test cases for the Credential class"""
@@ -73,6 +71,12 @@ class TestCredential(unittest.TestCase,):
         second_credential = Credential("instagram","donald","5678")
         second_credential.save_credential()
         self.assertEqual(len(Credential.credentials_list),2)
+        
+    def test_display_credentials(self):
+        """Test that confirms all a user's credentials are being displayed 
+        by returning a list of saved credentials"""
+        self.assertEqual(Credential.display_credentials(),Credential.credentials_list)
+
         
     def test_delete_credential(self):        
         """Test that confirms that a credential account is properly deleted"""
