@@ -4,6 +4,7 @@ from test_users_and_credentials import User
 from test_users_and_credentials import Credential
 import random
 import string
+import pyperclip
 
 def creates_user(username,password):
     """Function to create a new user"""
@@ -46,7 +47,10 @@ def check_credential_exists(account_name,c_username):
 def deletes_credential(credential):
     """Function that deletes a credential."""
     credential.delete_credential()
-
+    
+def copies_credential(credential):
+    """Function that copies a credential's details."""
+    return Credential.copy_credential()
 
 
 def generate_password(password_length):
@@ -123,7 +127,8 @@ def main():
                     while True:
                         print("use the exact short codes listed for credentials: ")
                         print("+"*45)
-                        print("\n ac - Add existing credential \n nc - Create new credential \n lc - Display all credentials \n fc - Find a credential \n del - Delete a credential")
+                        print("\n ac - Add existing credential \n nc - Create new credential \n lc - Display all credentials \n cc - Copy credential")
+                        print(" fc - Find a credential \n del - Delete a credential")
                         print("+"*45,"\n")
                         credential_short_code = input().lower().strip()
                         
@@ -180,6 +185,25 @@ def main():
                                     print(f"Account Name: {credential.account_name}\nAccount Username: {credential.c_username}\nAccount Password: {credential.c_password}\n")
                             else:
                                 print("You do not have any credentials saved. Add a credential.\n")
+                        
+                        elif credential_short_code == "cc":
+                            print("Enter details of credentials to be copied: ")
+                            print("\nEnter Account Name: ")
+                            copy_account_name = input().title()
+                            print("\nEnter Account Username: ")
+                            copy_account_username = input()
+                            if check_credential_exists(copy_account_name,copy_account_username) == False:
+                                print("_"*80)
+                                print("The credential does not exist.")
+                                print("_"*80)
+                            else:
+                                found_copy_credential = finds_credential(copy_account_name,copy_account_username)
+                                copies_credential(found_copy_credential)
+                                paste_string = pyperclip.paste()
+                                credential_paste_list = str.split(paste_string)
+                                print("Credential's details copied as below: ")
+                                print("-"*80)
+                                print(f"\nAccount Name: {credential_paste_list[0]}\nAccount Username: {credential_paste_list[1]}\nAccount Password: {credential_paste_list[2]}\n")
                                 
                         elif credential_short_code == "fc":
                             print("\nEnter Account Name: ")

@@ -83,6 +83,7 @@ class Credential():
         for credential in Credential.credentials_list:
             credential_attr = credential.account_name + " " + credential.c_username + " " + credential.c_password
             pyperclip.copy(credential_attr)
+        
 
 
 
