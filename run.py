@@ -43,6 +43,10 @@ def check_credential_exists(account_name,c_username):
     """Function that checks whether a credential exists and returns a Boolean"""
     return Credential.credential_exists(account_name,c_username)
 
+def deletes_credential(credential):
+    """Function that deletes a credential."""
+    credential.delete_credential()
+
 
 
 def generate_password(password_length):
@@ -119,7 +123,7 @@ def main():
                     while True:
                         print("use the exact short codes listed for credentials: ")
                         print("+"*45)
-                        print("\n ac - Add existing credential \n nc - Create new credential \n lc - Display all credentials \n fc - Find a credential")
+                        print("\n ac - Add existing credential \n nc - Create new credential \n lc - Display all credentials \n fc - Find a credential \n del - Delete a credential")
                         print("+"*45,"\n")
                         credential_short_code = input().lower().strip()
                         
@@ -132,10 +136,6 @@ def main():
                             existing_account_password = input()
                             saves_credential(creates_credential(existing_account_name,existing_account_username,existing_account_password))
                             print(f"\nNew credential successfully added: \nAccount Name: {existing_account_name} \nAccount Username: {existing_account_username} \nAccount Password: {existing_account_password}\n")                
-                            print("use the exact short codes listed for credentials: ")
-                            print("+"*45)
-                            print("\n ac - Add existing credential \n nc - Create new credential")
-                            print("+"*45,"\n")
                             
                         elif credential_short_code == "nc":
                             print("\nEnter Account Name: ")
@@ -166,19 +166,11 @@ def main():
                                         generated_password = generate_password(password_length)
                                         saves_credential(creates_credential(new_account_name,new_account_username,generated_password))
                                         print(f"\nNew credential successfully created: \nAccount Name: {new_account_name} \nAccount Username: {new_account_username} \nAccount Password: {generated_password}\n")                
-                                        print("use the exact short codes listed for credentials: ")
-                                        print("+"*45)
-                                        print("\n ac - Add existing credential \n nc - Create new credential")
-                                        print("+"*45,"\n")
                                 elif answer == "N":
                                     print("\nEnter Preferred Account Password: ")
                                     new_account_password = input()
                                     saves_credential(creates_credential(new_account_name,new_account_username,new_account_password))
                                     print(f"\nNew credential successfully created: \nAccount Name: {new_account_name} \nAccount Username: {new_account_username} \nAccount Password: {new_account_password}\n")                
-                                    print("use the exact short codes listed for credentials: ")
-                                    print("+"*45)
-                                    print("\n ac - Add existing credential \n nc - Create new credential")
-                                    print("+"*45,"\n")
                         
                         elif credential_short_code == "lc":
                             if len(Credential.credentials_list) != 0:
@@ -187,7 +179,7 @@ def main():
                                 for credential in displays_credentials():
                                     print(f"Account Name: {credential.account_name}\nAccount Username: {credential.c_username}\nAccount Password: {credential.c_password}\n")
                             else:
-                                print("You do not have any credentials saved. Add a credential.")
+                                print("You do not have any credentials saved. Add a credential.\n")
                                 
                         elif credential_short_code == "fc":
                             print("\nEnter Account Name: ")
@@ -203,6 +195,38 @@ def main():
                                 print("Below is your search result:")
                                 print("-"*80)
                                 print(f"\nAccount Name: {found_credential.account_name}\nAccount Username: {found_credential.c_username}\nAccount Password: {found_credential.c_password}\n")
+                        
+                        elif credential_short_code == "del":
+                            print("Enter details of account to be deleted: ")
+                            print("\nEnter Account Name: ")
+                            del_account_name = input().title()
+                            print("\nEnter Account Username: ")
+                            del_account_username = input()
+                            if check_credential_exists(del_account_name,del_account_username) == False:
+                                print("_"*80)
+                                print("The credential does not exist.")
+                                print("_"*80)
+                            else:
+                                found_del_credential = finds_credential(del_account_name,del_account_username)
+                                print("Below is your search result:")
+                                print("-"*80)
+                                print(f"\nAccount Name: {found_del_credential.account_name}\nAccount Username: {found_del_credential.c_username}\nAccount Password: {found_del_credential.c_password}\n")
+                                print("Are you sure you want to delete this credential? Y/N")
+                                del_answer = input().upper()
+                                while del_answer != "Y" and del_answer != "N":
+                                    print("_"*80)
+                                    print("Pick from the given choices Y/N")
+                                    print("_"*80)
+                                    print("Are you sure you want to delete this credential? Y/N")
+                                    del_answer = input().upper()
+                                else:
+                                    if del_answer == "Y":
+                                        deletes_credential(found_del_credential)
+                                        print("*"*80)
+                                        print("The credential has been deleted.")
+                                        print("*"*80,"\n")
+                                    elif del_answer == "N":
+                                        print("Must have been a mistake.")
 
                         
                         else:
