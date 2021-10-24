@@ -1,6 +1,7 @@
 import unittest
 from users_and_credentials import User
 from users_and_credentials import Credential
+import pyperclip
 
 class TestUser(unittest.TestCase):
     """Test class that defines the test cases for the user class"""
@@ -116,8 +117,12 @@ class TestCredential(unittest.TestCase,):
         self.new_credential.delete_credential()
         second_credential.delete_credential()
         self.assertEqual(len(Credential.credentials_list),1)
-
-
+        
+    def test_copy_credential(self):
+        """Test that confirms a credential's details are being copied"""
+        self.new_credential.save_credential()
+        Credential.copy_credential()
+        self.assertEqual("twitter goofy 0987",pyperclip.paste())
 
    
     

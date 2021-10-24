@@ -1,3 +1,4 @@
+import pyperclip
 class User:
     """Class that models instances of users."""
     users_list = []
@@ -76,7 +77,12 @@ class Credential():
         for credential in cls.credentials_list:
             if credential.account_name == account_name and credential.c_username == c_username:
                 return credential
-
+    @classmethod
+    def copy_credential(cls):
+        """Method that copies a credential's details"""
+        for credential in Credential.credentials_list:
+            credential_attr = credential.account_name + " " + credential.c_username + " " + credential.c_password
+            pyperclip.copy(credential_attr)
 
 
 
