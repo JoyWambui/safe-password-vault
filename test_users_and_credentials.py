@@ -41,6 +41,12 @@ class TestUser(unittest.TestCase):
         self.assertEqual(len(User.users_list),0)
         self.assertEqual(len(Credential.credentials_list),0)
         
+    def test_find_user(self):
+        """Test that checks if a user and their 
+        details can be found using the user's username"""
+        self.new_user.save_user()
+        found_user = User.find_user("minnie")
+        self.assertEqual(self.new_user.password,found_user.password)
         
         
     def test_user_exists(self):
