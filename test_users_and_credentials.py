@@ -85,7 +85,7 @@ class TestCredential(unittest.TestCase,):
         second_credential.save_credential()
         self.assertEqual(len(Credential.credentials_list),2)
         
-    def test_user_exists(self):
+    def test_credential_exists(self):
         """test to check if a Boolean is returned when a credential is found."""
         self.new_credential.save_credential()
         checked_credential = Credential.credential_exists("twitter","goofy")
