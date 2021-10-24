@@ -41,11 +41,13 @@ class TestUser(unittest.TestCase):
         self.assertEqual(len(User.users_list),0)
         self.assertEqual(len(Credential.credentials_list),0)
         
+        
+        
     def test_user_exists(self):
         """test to check if a Boolean is returned when a user is found."""
         self.new_user.save_user()
-        found_user = User.user_exists(self.new_user.username)
-        self.assertTrue(found_user)
+        confirmed_user = User.user_exists(self.new_user.username)
+        self.assertTrue(confirmed_user)
 class TestCredential(unittest.TestCase,):
     """Test class that defines the test cases for the Credential class"""
     

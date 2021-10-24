@@ -3,14 +3,18 @@
 from test_users_and_credentials import User
 from test_users_and_credentials import Credential
 
-def create_user(username,password):
+def creates_user(username,password):
     """Function to create a new user"""
     new_user = User(username,password)
     return new_user
 
-def save_user(user):
+def saves_user(user):
     """Function to save a new user"""
     user.save_user()
+    
+def confirm_user_exists(username):
+    """Function that checks whether a user account exists and returns a Boolean"""
+    return User.user_exists(username)
 
 
 def main():
@@ -23,7 +27,7 @@ def main():
     while True:
         print("use the exact short codes listed: ")
         print("-"*33)
-        print("\n cu - Create new account")
+        print("\n cu - Create new account \n lg - Login to account")
         print("-"*33)
 
         
@@ -44,12 +48,23 @@ def main():
                 print("Confirm new password: ")
                 confirmed_password = input()
             else:
-                save_user(create_user(new_username,new_password))
+                saves_user(creates_user(new_username,new_password))
                 print(f"\nNew account successfully created: \nUsername: {new_username} \nPassword: {new_password}\n")                
                 print("*"*80)
                 print("PROCEED TO LOGIN")
                 print("*"*80,"\n")
         
+        elif short_code == "lg":
+            print("Enter username: ")
+            login_username = input().lower()
+            print("Enter password: \n")
+            login_password = input()
+            if confirm_user_exists(login_username) == False:
+                print("*"*80)
+                print("The user does not exist. Create an account.")
+                print("*"*80,"\n")
+           
+
         else:
             print("Kindly use the short codes provided")
 
