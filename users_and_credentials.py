@@ -18,8 +18,16 @@ class User:
         """Deletes user accounts"""
         self.credentials_list.clear()
         User.users_list.remove(self)
-   
-
+        
+    @classmethod
+    def user_exists(cls,username):
+        """Method that checks whether a user account exists"""
+        for user in cls.users_list:
+            if user.username == username:
+                return True
+        return False
+        
+    
         
 class Credential():
     """Class that instantiates new credentials that 
