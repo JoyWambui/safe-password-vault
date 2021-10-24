@@ -62,6 +62,14 @@ class Credential():
         """Displays all of a user's saved credentials"""
         return cls.credentials_list
     
+    @classmethod
+    def credential_exists(cls,account_name,c_username):
+        """Method that checks whether a credential exists"""
+        for credential in cls.credentials_list:
+            if credential.account_name == account_name and credential.c_username == c_username:
+                return True
+        return False
+    
     @classmethod    
     def find_credential(cls,account_name,c_username):
         """Method that finds a user's credential using its account name and username and returns the credential."""

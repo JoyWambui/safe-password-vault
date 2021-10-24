@@ -85,6 +85,13 @@ class TestCredential(unittest.TestCase,):
         second_credential.save_credential()
         self.assertEqual(len(Credential.credentials_list),2)
         
+    def test_user_exists(self):
+        """test to check if a Boolean is returned when a credential is found."""
+        self.new_credential.save_credential()
+        checked_credential = Credential.credential_exists("twitter","goofy")
+        self.assertTrue(checked_credential)
+
+        
     def test_find_credential(self):
         """Test that checks if a user and their 
         details can be found using the user's username"""
@@ -92,7 +99,6 @@ class TestCredential(unittest.TestCase,):
         found_credential = Credential.find_credential("twitter","goofy")
         self.assertEqual(self.new_credential.c_password,found_credential.c_password)
 
-        
         
     def test_display_credentials(self):
         """Test that confirms all a user's credentials are being displayed 
