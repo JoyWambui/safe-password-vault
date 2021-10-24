@@ -85,6 +85,15 @@ class TestCredential(unittest.TestCase,):
         second_credential.save_credential()
         self.assertEqual(len(Credential.credentials_list),2)
         
+    def test_find_credential(self):
+        """Test that checks if a user and their 
+        details can be found using the user's username"""
+        self.new_credential.save_credential()
+        found_credential = Credential.find_credential("twitter","goofy")
+        self.assertEqual(self.new_credential.c_password,found_credential.c_password)
+
+        
+        
     def test_display_credentials(self):
         """Test that confirms all a user's credentials are being displayed 
         by returning a list of saved credentials"""
