@@ -41,12 +41,12 @@ class Credential():
     requires an account name, username and password"""
     credentials_list = []
     
-    def __init__(self,account_name,username,password):
+    def __init__(self,account_name,c_username,c_password):
         """Initialize account_name, username, and password attributes"""
         
         self.account_name = account_name
-        self.username = username
-        self.password = password
+        self.c_username = c_username
+        self.c_password = c_password
         
     def save_credential(self):
         """Saves created credentials to a predefined list in the user class"""

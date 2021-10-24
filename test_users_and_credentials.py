@@ -70,8 +70,8 @@ class TestCredential(unittest.TestCase,):
     def test_credential_init(self):
         """Test to check whether the Credential object is being initialized properly """
         self.assertEqual(self.new_credential.account_name,"twitter")
-        self.assertEqual(self.new_credential.username,"goofy")
-        self.assertEqual(self.new_credential.password,"0987")
+        self.assertEqual(self.new_credential.c_username,"goofy")
+        self.assertEqual(self.new_credential.c_password,"0987")
     
     def test_save_credential(self):
         """Test that confirms a credential is saved"""

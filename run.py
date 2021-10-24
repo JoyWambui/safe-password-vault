@@ -20,6 +20,21 @@ def confirm_user_exists(username):
     """Function that checks whether a user account exists and returns a Boolean"""
     return User.user_exists(username)
 
+def creates_credential(account_name,c_username,c_password):
+    """Function to add a credential"""
+    new_credential = Credential(account_name,c_username,c_password)
+    return new_credential
+
+def saves_credential(credential):
+    """Function that saves added credentials."""
+    credential.save_credential()
+
+        
+        
+
+    
+
+
 
 def main():
     print("Hello! Welcome to SAFE PASSWORD VAULT.\nWhat is your name?")
@@ -73,24 +88,35 @@ def main():
                     print("\nWrong password. Input the correct password")
                     print("Enter username: ")
                     login_username = input().lower()
-                    print("Enter password: \n")
+                    print("\nEnter password: ")
                     login_password = input()
                 else:
                     print("*"*80)
                     print("LOGIN SUCCESSFUL!!!")
                     print("*"*80,"\n")
+                    print("use the exact short codes listed for credentials: ")
+                    print("+"*45)
+                    print("\n ac - Add existing credential ")
+                    print("+"*45,"\n")
+                    credential_short_code = input().lower().strip()
+                    
+                    if credential_short_code == "ac":
+                        print("\nEnter Account Name: ")
+                        existing_account_name = input().title()
+                        print("\nEnter Account Username: ")
+                        existing_username = input()
+                        print("\nEnter Account Password: ")
+                        existing_password = input()
+                        saves_credential(creates_credential(existing_account_name,existing_username,existing_password))
+                        print(f"\nNew credential successfully added: \nAccount Name: {existing_account_name} \nAccount Username: {existing_username} \nAccount Password: {existing_password}\n")                
+                        print("use the exact short codes listed for credentials: ")
+                        print("+"*45)
+                        print("\n ac - Add existing credential ")
+                        print("+"*45,"\n")
 
-
-           
-
+                        
         else:
             print("Kindly use the short codes provided")
-
-
-
-
-            
-        
 
     
 if __name__ == '__main__':
