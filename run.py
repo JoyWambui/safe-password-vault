@@ -30,6 +30,11 @@ def creates_credential(account_name,c_username,c_password):
 def saves_credential(credential):
     """Function that saves added credentials."""
     credential.save_credential()
+    
+def displays_credentials():
+    """Function that returns all a user's credentials."""
+    return Credential.display_credentials()
+
 
 def generate_password(password_length):
     """Function that auto-generates a mixed character password of a desired length""" 
@@ -97,14 +102,15 @@ def main():
                     print("\nEnter password: ")
                     login_password = input()
                 else:
+                    print("\n")
+                    print("*"*80)
+                    print("LOGIN SUCCESSFUL!!!")
+                    print("*"*80,"\n")
+
                     while True:
-                        print("\n")
-                        print("*"*80)
-                        print("LOGIN SUCCESSFUL!!!")
-                        print("*"*80,"\n")
                         print("use the exact short codes listed for credentials: ")
                         print("+"*45)
-                        print("\n ac - Add existing credential \n nc - Create new credential")
+                        print("\n ac - Add existing credential \n nc - Create new credential \n lc - Display all credentials")
                         print("+"*45,"\n")
                         credential_short_code = input().lower().strip()
                         
@@ -164,6 +170,13 @@ def main():
                                     print("+"*45)
                                     print("\n ac - Add existing credential \n nc - Create new credential")
                                     print("+"*45,"\n")
+                        
+                        elif credential_short_code == "lc":
+                            print("A list of all your saved Credentials")
+                            print("-"*80)
+                            for credential in displays_credentials():
+                                print(f"Account Name: {credential.account_name}\nAccount Username: {credential.c_username}\nAccount Password: {credential.c_password}/n")
+                        
                         else:
                             print("Kindly use the credential short codes provided")
       
