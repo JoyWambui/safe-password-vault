@@ -23,6 +23,11 @@ def confirm_user_exists(username):
     """Function that checks whether a user account exists and returns a Boolean"""
     return User.user_exists(username)
 
+def deletes_user(user):
+    """Function that deletes a user."""
+    user.delete_user()
+
+
 def creates_credential(account_name,c_username,c_password):
     """Function to add a credential"""
     new_credential = Credential(account_name,c_username,c_password)
@@ -69,7 +74,7 @@ def main():
     while True:
         print("\nUse the exact short codes listed: ")
         print("-"*33)
-        print("\n cu - Create new account \n lg - Login to account")
+        print("\n cu - Create new account \n lg - Login to account \n da - Delete account \n ex - Exit application")
         print("-"*33)
 
         
@@ -128,7 +133,7 @@ def main():
                         print("use the exact short codes listed for credentials: ")
                         print("+"*45)
                         print("\n ac - Add existing credential \n nc - Create new credential \n lc - Display all credentials \n cc - Copy credential")
-                        print(" fc - Find a credential \n del - Delete a credential")
+                        print(" fc - Find a credential \n del - Delete a credential \n bc - Back to main menu")
                         print("+"*45,"\n")
                         credential_short_code = input().lower().strip()
                         
@@ -252,10 +257,49 @@ def main():
                                     elif del_answer == "N":
                                         print("Must have been a mistake.")
 
+                        elif credential_short_code == "bc":
+                            print("\nGoing back to main menu","."*15)
+                            print("*"*80)
+                            break
                         
                         else:
                             print("Kindly use the credential short codes provided")
-      
+                            
+        elif short_code == "da":
+            print("\nEnter Username of account to be deleted: ")
+            delete_account_username = input()
+            if confirm_user_exists(delete_account_username) == False:
+                print("_"*80)
+                print("The user does not exist.")
+                print("_"*80)
+            else:
+                found_del_user = finds_user(delete_account_username)
+                print("Below is your search result:")
+                print("-"*80)
+                print(f"\nAccount Username: {found_del_user.username}\nAccount Password: {found_del_user.password}\n")
+                print("Are you sure you want to delete this credential? Y/N")
+                del_answer = input().upper()
+                while del_answer != "Y" and del_answer != "N":
+                    print("_"*80)
+                    print("Pick from the given choices Y/N")
+                    print("_"*80)
+                    print("Are you sure you want to delete this credential? Y/N")
+                    del_answer = input().upper()
+                else:
+                    if del_answer == "Y":
+                        deletes_user(found_del_user)
+                        print("*"*80)
+                        print("The User Account has been deleted.")
+                        print("*"*80,"\n")
+                    elif del_answer == "N":
+                        print("Must have been a mistake.")
+
+        elif short_code == "ex":
+            print("\nExiting the Application","."*15)
+            print("\nGOODBYE")
+            print("*"*80)
+            break
+        
         else:
             print("Kindly use the short codes provided")
 
