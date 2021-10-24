@@ -8,6 +8,11 @@ def create_user(username,password):
     new_user = User(username,password)
     return new_user
 
+def save_user(user):
+    """Function to save a new user"""
+    user.save_user()
+
+
 def main():
     print("Hello! Welcome to SAFE PASSWORD VAULT.\nWhat is your name?")
     user = input().title()
@@ -39,7 +44,7 @@ def main():
                 print("Confirm new password: ")
                 confirmed_password = input()
             else:
-                create_user(new_username,new_password)
+                save_user(create_user(new_username,new_password))
                 print(f"\nNew account successfully created: \nUsername: {new_username} \nPassword: {new_password}\n")                
                 print("*"*80)
                 print("PROCEED TO LOGIN")
