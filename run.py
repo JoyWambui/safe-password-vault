@@ -172,11 +172,13 @@ def main():
                                     print("+"*45,"\n")
                         
                         elif credential_short_code == "lc":
-                            print("A list of all your saved Credentials")
-                            print("-"*80)
-                            for credential in displays_credentials():
-                                print(f"Account Name: {credential.account_name}\nAccount Username: {credential.c_username}\nAccount Password: {credential.c_password}/n")
-                        
+                            if len(Credential.credentials_list) != 0:
+                                print("A list of all your saved Credentials")
+                                print("-"*80)
+                                for credential in displays_credentials():
+                                    print(f"Account Name: {credential.account_name}\nAccount Username: {credential.c_username}\nAccount Password: {credential.c_password}/n")
+                            else:
+                                print("You do not have any credentials saved. Add a credential.")
                         else:
                             print("Kindly use the credential short codes provided")
       
