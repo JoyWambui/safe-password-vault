@@ -12,6 +12,10 @@ def saves_user(user):
     """Function to save a new user"""
     user.save_user()
     
+def finds_user(username):
+    """Function that finds a user account and returns it."""
+    return User.find_user(username)
+    
 def confirm_user_exists(username):
     """Function that checks whether a user account exists and returns a Boolean"""
     return User.user_exists(username)
@@ -63,6 +67,20 @@ def main():
                 print("*"*80)
                 print("The user does not exist. Create an account.")
                 print("*"*80,"\n")
+            else:
+                found_username = finds_user(login_username)
+                while login_password != found_username.password:
+                    print("\nWrong password. Input the correct password")
+                    print("Enter username: ")
+                    login_username = input().lower()
+                    print("Enter password: \n")
+                    login_password = input()
+                else:
+                    print("*"*80)
+                    print("LOGIN SUCCESSFUL!!!")
+                    print("*"*80,"\n")
+
+
            
 
         else:
