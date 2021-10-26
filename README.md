@@ -7,8 +7,14 @@ Safe Password Vault is a basic python application that allows a user to store pa
 * Copy the url of the repository. You can copy manually or click the clipboard button.
 * Open the terminal into the desired folder and use the git clone command to clone the repository in the terminal. The terminal will give feedback of a successful cloning.
 * List the contents of the folder to check that the directory is present.
-* To access the application, from the terminal run :
-            ./run.py
+* If python is installed on your computer:
+    * From the terminal run :
+        1. Run chmod +x run.py from within the folder
+        2. Run ./run.py to execute the application
+* If python is not installed on your computer:
+    1. Install python.
+    2. Follow the steps above.
+
 
 ## Technologies Used
 Python
